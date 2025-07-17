@@ -2,90 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>baked | Ready to Get Baked?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baked - Get Baked?</title>
   <style>
     body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #f4f3ef;
+      color: #333;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f3f3f3;
-      color: #1c1c1c;
+      padding: 0;
     }
+
     header {
-      background-color: #1e1e1e;
-      color: #a3e635;
+      background-color: #2e7d32;
+      color: #fff;
       padding: 1rem;
       text-align: center;
     }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    p.motto {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
     .logo {
-      font-size: 2rem;
-      font-weight: bold;
-      font-family: 'Brush Script MT', cursive;
+      width: 100px;
+      margin-top: 10px;
     }
-    .tagline {
-      font-size: 1rem;
-      color: #ccc;
-    }
-    .menu {
+
+    .container {
       padding: 2rem;
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
-    .item {
-      background: #fff;
-      border-radius: 1rem;
+
+    .product {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       padding: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
+      margin-bottom: 1.5rem;
     }
-    .item h3 {
-      margin: 0.5rem 0;
-      color: #3f6212;
+
+    .product h2 {
+      margin-top: 0;
+      color: #2e7d32;
     }
-    .item p {
-      font-size: 0.9rem;
+
+    form {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: #2e7d32;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
     footer {
-      background-color: #1e1e1e;
-      color: #aaa;
       text-align: center;
       padding: 1rem;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
+      color: #666;
     }
+
   </style>
 </head>
 <body>
+
   <header>
-    <div class="logo">baked</div>
-    <div class="tagline">ready to get baked?</div>
+    <img class="logo" src="https://i.ibb.co/6P3fmrR/A-logo-for_the_cannabis-themed_brand_named_baked.png" alt="Baked Logo">
+    <h1>baked</h1>
+    <p class="motto">ready to get baked?</p>
   </header>
 
-  <section class="menu">
-    <div class="item">
-      <h3>Kush Gummies</h3>
-      <p>Chewy, sweet.</p>
+  <div class="container">
+    <div class="product">
+      <h2>Kush Gummies</h2>
+      <p>Baked gummies, chewy, sweet.</p>
     </div>
-    <div class="item">
-      <h3>Kush Ice Cream</h3>
+    <div class="product">
+      <h2>Kush Ice Cream</h2>
       <p>Creamy, vanilla.</p>
     </div>
-    <div class="item">
-      <h3>Kush Bites Cookies</h3>
+    <div class="product">
+      <h2>Kush Bites Cookies</h2>
       <p>Soft-baked.</p>
     </div>
-    <div class="item">
-      <h3>Kush Glazed Popcorn</h3>
+    <div class="product">
+      <h2>Kush Glazed Popcorn</h2>
       <p>Crunchy, glazed, milky.</p>
     </div>
-    <div class="item">
-      <h3>Kush Shawarma</h3>
+    <div class="product">
+      <h2>Kush Shawarma</h2>
       <p>Creamy, meaty.</p>
     </div>
-  </section>
+
+    <h2 style="margin-top: 3rem;">Place Your Order</h2>
+    <form name="order" method="POST" data-netlify="true" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="text" name="address" placeholder="Delivery address" required />
+      <input type="text" name="phone" placeholder="Phone number" required />
+      <textarea name="orderDetails" placeholder="What would you like to order?" rows="4" required></textarea>
+      <label>Upload Opay Payment Screenshot</label>
+      <input type="file" name="paymentProof" accept="image/*" />
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
 
   <footer>
-    &copy; 2025 baked | All rights reserved.
+    &copy; 00 baked. All rights reserved.
   </footer>
+
 </body>
 </html>
