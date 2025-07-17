@@ -1,137 +1,167 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Baked - Get Baked?</title>
+  <title>Baked</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background-color: #f4f3ef;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdf8f3;
       color: #333;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
-
     header {
-      background-color: #2e7d32;
-      color: #fff;
-      padding: 1rem;
       text-align: center;
+      margin-bottom: 30px;
     }
-
+    header img {
+      max-width: 150px;
+      border-radius: 10px;
+    }
     h1 {
       font-size: 2.5rem;
-      margin: 0;
+      margin: 10px 0;
     }
-
-    p.motto {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
+    p.tagline {
+      color: #666;
+      font-style: italic;
     }
-
-    .logo {
-      width: 100px;
-      margin-top: 10px;
-    }
-
-    .container {
-      padding: 2rem;
-    }
-
     .product {
-      background-color: #fff;
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 1rem;
-      margin-bottom: 1.5rem;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
     .product h2 {
-      margin-top: 0;
-      color: #2e7d32;
+      margin: 0 0 5px;
     }
-
     form {
-      background-color: #fff;
-      padding: 1.5rem;
+      background: #fff;
+      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
-    form input, form textarea {
+    label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+    input, select, textarea, button {
       width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
+      padding: 10px;
+      font-size: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 1rem;
+      margin-bottom: 15px;
     }
-
-    form button {
-      background-color: #2e7d32;
+    button {
+      background: #222;
       color: white;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
       border: none;
-      border-radius: 8px;
       cursor: pointer;
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #666;
+    button:hover {
+      background: #444;
     }
-
+    .order-group {
+      border-bottom: 1px dashed #ccc;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-
   <header>
-    <img class="logo" src="https://i.ibb.co/6P3fmrR/A-logo-for_the_cannabis-themed_brand_named_baked.png" alt="Baked Logo">
-    <h1>baked</h1>
-    <p class="motto">ready to get baked?</p>
+    <img src="https://uploadthing.com/f/06e70bb9-0ce0-4c7e-9a42-294350a1e7f1-baked_logo.png" alt="Baked Logo" />
+    <h1>Baked</h1>
+    <p class="tagline">Ready to get baked?</p>
   </header>
 
-  <div class="container">
-    <div class="product">
-      <h2>Kush Gummies</h2>
-      <p>Baked gummies, chewy, sweet.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Ice Cream</h2>
-      <p>Creamy, vanilla.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Bites Cookies</h2>
-      <p>Soft-baked.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Glazed Popcorn</h2>
-      <p>Crunchy, glazed, milky.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Shawarma</h2>
-      <p>Creamy, meaty.</p>
-    </div>
+  <section id="products">
+    <div class="product"><h2>Kush Gummies</h2><p>Chewy, sweet.</p></div>
+    <div class="product"><h2>Kush Ice-Cream</h2><p>Creamy, vanilla.</p></div>
+    <div class="product"><h2>Kush Bites Cookies</h2><p>Soft-baked.</p></div>
+    <div class="product"><h2>Kush Glazed Popcorn</h2><p>Crunchy, glazed, milky.</p></div>
+    <div class="product"><h2>Kush Shawarma</h2><p>Creamy, meaty.</p></div>
+  </section>
 
-    <h2 style="margin-top: 3rem;">Place Your Order</h2>
+  <section id="order">
+    <h2>Place Your Order</h2>
     <form name="order" method="POST" data-netlify="true" enctype="multipart/form-data">
-      <input type="text" name="name" placeholder="Your name" required />
-      <input type="text" name="address" placeholder="Delivery address" required />
-      <input type="text" name="phone" placeholder="Phone number" required />
-      <textarea name="orderDetails" placeholder="What would you like to order?" rows="4" required></textarea>
-      <label>Upload Opay Payment Screenshot</label>
-      <input type="file" name="paymentProof" accept="image/*" />
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name" required />
+
+      <label for="address">Delivery Address</label>
+      <textarea name="address" id="address" rows="2" required></textarea>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" id="phone" required />
+
+      <div id="order-items"></div>
+      <button type="button" onclick="addOrderItem()">Add Product</button>
+
+      <label for="receipt">Upload Payment Receipt</label>
+      <input type="file" name="receipt" id="receipt" accept="image/*" required />
+
       <button type="submit">Submit Order</button>
     </form>
-  </div>
+  </section>
 
-  <footer>
-    &copy; 00 baked. All rights reserved.
-  </footer>
+  <script>
+    const products = [
+      "Kush Gummies",
+      "Kush Ice-Cream",
+      "Kush Bites Cookies",
+      "Kush Glazed Popcorn",
+      "Kush Shawarma"
+    ];
+    let count = 0;
 
+    function addOrderItem() {
+      const container = document.getElementById("order-items");
+      const group = document.createElement("div");
+      group.className = "order-group";
+
+      const productLabel = document.createElement("label");
+      productLabel.textContent = "Select Product";
+      const select = document.createElement("select");
+      select.name = `product_${count}`;
+      select.required = true;
+
+      const defaultOption = document.createElement("option");
+      defaultOption.text = "Select a product";
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      select.appendChild(defaultOption);
+
+      products.forEach(product => {
+        const option = document.createElement("option");
+        option.value = product;
+        option.textContent = product;
+        select.appendChild(option);
+      });
+
+      const qtyLabel = document.createElement("label");
+      qtyLabel.textContent = "Quantity";
+      const qtyInput = document.createElement("input");
+      qtyInput.type = "number";
+      qtyInput.name = `quantity_${count}`;
+      qtyInput.min = 1;
+      qtyInput.value = 1;
+      qtyInput.required = true;
+
+      group.appendChild(productLabel);
+      group.appendChild(select);
+      group.appendChild(qtyLabel);
+      group.appendChild(qtyInput);
+      container.appendChild(group);
+      count++;
+    }
+
+    window.onload = addOrderItem;
+  </script>
 </body>
 </html>
