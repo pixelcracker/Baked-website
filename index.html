@@ -2,190 +2,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Baked</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Baked - Edibles & Snacks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #fdfcf9;
-      color: #2e2e2e;
+      font-family: 'Outfit', sans-serif;
+      background-color: #f6f6f2;
+      color: #1a1a1a;
     }
     header {
       text-align: center;
-      padding: 2rem 1rem 1rem;
+      padding: 20px;
     }
     header img {
-      max-width: 150px;
+      height: 100px;
     }
     h1 {
-      font-size: 2rem;
-      margin: 1rem 0;
-      color: #3a3a3a;
+      font-size: 2.5rem;
+      margin-bottom: 0;
     }
-    .product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      padding: 1rem;
-      max-width: 900px;
-      margin: auto;
+    .tagline {
+      font-size: 1rem;
+      color: #5f5f5f;
+    }
+    .products, .form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
     .product {
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
     }
-    .product h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-      color: #1e1e1e;
-    }
-    .product p {
-      font-size: 0.95rem;
-      color: #666;
-    }
-    form {
-      background: #fff;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-    }
-    form h3 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: #333;
-    }
-    label {
+    label, input, select, textarea {
       display: block;
-      margin: 1rem 0 0.4rem;
-      font-weight: 600;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 1rem;
     }
     input, select, textarea {
-      width: 100%;
-      padding: 0.6rem;
+      padding: 10px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      border-radius: 6px;
+    }
+    button {
+      background-color: #3a7c3a;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
       font-size: 1rem;
     }
-    .order-group {
-      margin-bottom: 1rem;
-    }
-    .add-order-btn {
-      margin-top: 1rem;
-      background: #3a8d4d;
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button[type="submit"] {
-      margin-top: 1.5rem;
-      background: #2d753c;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .thank-you {
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      color: green;
+    button:hover {
+      background-color: #326732;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Baked Logo" />
-    <h1>Get Baked 🍃</h1>
-  </header>  <section class="product-list">
-    <div class="product">
-      <h2>Kush Gummies</h2>
-      <p>Chewy, sweet.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Ice Cream</h2>
-      <p>Creamy, vanilla.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Bites Cookies</h2>
-      <p>Soft-baked.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Glazed Popcorn</h2>
-      <p>Crunchy, glazed, milky.</p>
-    </div>
-    <div class="product">
-      <h2>Kush Shawarma</h2>
-      <p>Creamy, meaty.</p>
-    </div>
-  </section>  <form name="order" netlify enctype="multipart/form-data" onsubmit="handleSubmit(event)">
-    <h3>Place Your Order</h3>
-    <label for="name">Full Name</label>
-    <input type="text" name="name" required /><label for="contact">Contact (Phone or Email)</label>
-<input type="text" name="contact" required />
+    <img src="https://getbaked.netlify.app/logo.png" alt="Baked Logo" />
+    <h1>baked</h1>
+    <p class="tagline">ready to get baked?</p>
+  </header>  <section class="products">
+    <h2>Menu</h2>
+    <p><strong>Kush Gummies</strong>: baked gummies, chewy, sweet.</p>
+    <p><strong>Kush Ice-Cream</strong>: creamy, vanilla.</p>
+    <p><strong>Kush Bites Cookies</strong>: soft-baked.</p>
+    <p><strong>Kush Glazed Popcorn</strong>: crunchy, glazed, milky.</p>
+    <p><strong>Kush Shawarma</strong>: creamy, meaty.</p>
+  </section>  <section class="form-container">
+    <h2>Order Now</h2>
+    <form name="order" method="POST" data-netlify="true" enctype="multipart/form-data">
+      <div id="orders"></div>
+      <button type="button" onclick="addOrderField()">Add Item</button><label for="phone">Phone Number</label>
+  <input type="tel" name="phone" required />
 
-<div id="order-container">
-  <div class="order-group">
-    <label>Item</label>
-    <select name="order[]">
-      <option>Kush Gummies</option>
-      <option>Kush Ice Cream</option>
-      <option>Kush Bites Cookies</option>
-      <option>Kush Glazed Popcorn</option>
-      <option>Kush Shawarma</option>
-    </select>
-    <label>Quantity</label>
-    <input type="number" name="quantity[]" min="1" value="1" />
-  </div>
-</div>
+  <label for="receipt">Payment Receipt</label>
+  <input type="file" name="receipt" accept="image/*,application/pdf" required />
 
-<button class="add-order-btn" type="button" onclick="addOrder()">+ Add Another Item</button>
+  <button type="submit">Submit Order</button>
+</form>
 
-<label for="receipt">Payment Receipt (screenshot)</label>
-<input type="file" name="receipt" accept="image/*,application/pdf" required />
+  </section>  <script>
+    const products = [
+      "Kush Gummies",
+      "Kush Ice-Cream",
+      "Kush Bites Cookies",
+      "Kush Glazed Popcorn",
+      "Kush Shawarma"
+    ];
 
-<button type="submit">Submit Order</button>
-<div class="thank-you" id="thankYouMessage" style="display:none;">Thanks! Your order has been submitted 🍪</div>
+    function addOrderField() {
+      const container = document.getElementById("orders");
+      const wrapper = document.createElement("div");
+      const select = document.createElement("select");
+      select.name = "order[]";
+      select.required = true;
+      const defaultOption = document.createElement("option");
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      defaultOption.textContent = "Select an item";
+      select.appendChild(defaultOption);
 
-  </form>  <script>
-    function addOrder() {
-      const container = document.getElementById('order-container');
-      const group = document.createElement('div');
-      group.className = 'order-group';
-      group.innerHTML = `
-        <label>Item</label>
-        <select name="order[]">
-          <option>Kush Gummies</option>
-          <option>Kush Ice Cream</option>
-          <option>Kush Bites Cookies</option>
-          <option>Kush Glazed Popcorn</option>
-          <option>Kush Shawarma</option>
-        </select>
-        <label>Quantity</label>
-        <input type="number" name="quantity[]" min="1" value="1" />
-      `;
-      container.appendChild(group);
+      products.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item;
+        option.textContent = item;
+        select.appendChild(option);
+      });
+
+      const quantity = document.createElement("input");
+      quantity.type = "number";
+      quantity.name = "quantity[]";
+      quantity.placeholder = "Quantity";
+      quantity.min = 1;
+      quantity.required = true;
+
+      wrapper.appendChild(select);
+      wrapper.appendChild(quantity);
+      container.appendChild(wrapper);
     }
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      fetch("/", {
-        method: "POST",
-        body: formData
-      }).then(() => {
-        form.reset();
-        document.getElementById('thankYouMessage').style.display = 'block';
-      }).catch(() => alert("Submission failed. Try again."));
-    }
+    document.forms[0].addEventListener("submit", function (e) {
+      setTimeout(() => {
+        this.reset();
+        document.getElementById("orders").innerHTML = "";
+      }, 1000);
+    });
+
+    addOrderField();
   </script></body>
 </html>
