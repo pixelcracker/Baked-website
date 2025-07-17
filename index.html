@@ -1,140 +1,141 @@
- <!DOCTYPE html><html lang="en">
+ <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Baked - Edibles & Snacks</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baked - Get Baked?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
       font-family: 'Outfit', sans-serif;
-      background-color: #f6f6f2;
+      background-color: #f8f8f8;
       color: #1a1a1a;
+      margin: 0;
+      padding: 0;
     }
     header {
+      background-color: #ffffff;
       text-align: center;
-      padding: 20px;
+      padding: 1.2em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     header img {
-      height: 100px;
+      height: 80px;
     }
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0;
+      font-size: 2em;
+      margin: 0.5em 0;
     }
-    .tagline {
-      font-size: 1rem;
-      color: #5f5f5f;
+    form {
+      background: #fff;
+      margin: 2em auto;
+      padding: 2em;
+      border-radius: 10px;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .products, .form-container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .product {
-      margin-bottom: 10px;
-    }
-    label, input, select, textarea {
+    label {
       display: block;
-      width: 100%;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      font-size: 1rem;
+      margin: 1em 0 0.3em;
     }
-    input, select, textarea {
-      padding: 10px;
-      border-radius: 8px;
+    input, select {
+      width: 100%;
+      padding: 0.7em;
       border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    input[type="file"] {
+      border: none;
     }
     button {
-      background-color: #3a7c3a;
+      background: #2ecc71;
       color: white;
-      padding: 12px;
       border: none;
-      border-radius: 8px;
+      padding: 0.9em 1.4em;
+      margin-top: 1.5em;
       cursor: pointer;
-      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
     }
     button:hover {
-      background-color: #326732;
+      background: #27ae60;
+    }
+    .order-group {
+      margin-bottom: 1em;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="https://getbaked.netlify.app/logo.png" alt="Baked Logo" />
-    <h1>baked</h1>
-    <p class="tagline">ready to get baked?</p>
-  </header>  <section class="products">
-    <h2>Menu</h2>
-    <p><strong>Kush Gummies</strong>: baked gummies, chewy, sweet.</p>
-    <p><strong>Kush Ice-Cream</strong>: creamy, vanilla.</p>
-    <p><strong>Kush Bites Cookies</strong>: soft-baked.</p>
-    <p><strong>Kush Glazed Popcorn</strong>: crunchy, glazed, milky.</p>
-    <p><strong>Kush Shawarma</strong>: creamy, meaty.</p>
-  </section>  <section class="form-container">
-    <h2>Order Now</h2>
-    <form name="order" method="POST" data-netlify="true" enctype="multipart/form-data">
-      <div id="orders"></div>
-      <button type="button" onclick="addOrderField()">Add Item</button><label for="phone">Phone Number</label>
-  <input type="tel" name="phone" required />
+
+<header>
+  <img src="logo.png" alt="Baked Logo" /> <!-- Replace with your actual logo path -->
+</header>
+
+<form name="order" method="POST" data-netlify="true" enctype="multipart/form-data">
+  <h1>Order Now</h1>
+
+  <label for="phone">Phone Number</label>
+  <input type="tel" name="phone" id="phone" required />
+
+  <label for="address">Delivery Address</label>
+  <input type="text" name="address" id="address" required />
+
+  <div id="order-container">
+    <div class="order-group">
+      <label>Choose Product</label>
+      <select name="order1">
+        <option value="">-- Select an item --</option>
+        <option value="Kush Gummies">Kush Gummies</option>
+        <option value="Kush Ice Cream">Kush Ice Cream</option>
+        <option value="Kush Bites Cookies">Kush Bites Cookies</option>
+        <option value="Kush Glazed Popcorn">Kush Glazed Popcorn</option>
+        <option value="Kush Shawarma">Kush Shawarma</option>
+      </select>
+
+      <label>Quantity</label>
+      <input type="number" name="quantity1" min="1" />
+    </div>
+  </div>
+
+  <button type="button" onclick="addOrderField()">+ Add Another Item</button>
 
   <label for="receipt">Payment Receipt</label>
-  <input type="file" name="receipt" accept="image/*,application/pdf" required />
+  <input type="file" name="receipt" id="receipt" accept="image/*" required />
 
   <button type="submit">Submit Order</button>
 </form>
 
-  </section>  <script>
-    const products = [
-      "Kush Gummies",
-      "Kush Ice-Cream",
-      "Kush Bites Cookies",
-      "Kush Glazed Popcorn",
-      "Kush Shawarma"
-    ];
+<script>
+  let orderCount = 1;
 
-    function addOrderField() {
-      const container = document.getElementById("orders");
-      const wrapper = document.createElement("div");
-      const select = document.createElement("select");
-      select.name = "order[]";
-      select.required = true;
-      const defaultOption = document.createElement("option");
-      defaultOption.disabled = true;
-      defaultOption.selected = true;
-      defaultOption.textContent = "Select an item";
-      select.appendChild(defaultOption);
+  function addOrderField() {
+    orderCount++;
+    const container = document.getElementById('order-container');
+    const group = document.createElement('div');
+    group.classList.add('order-group');
+    group.innerHTML = `
+      <label>Choose Product</label>
+      <select name="order${orderCount}">
+        <option value="">-- Select an item --</option>
+        <option value="Kush Gummies">Kush Gummies</option>
+        <option value="Kush Ice Cream">Kush Ice Cream</option>
+        <option value="Kush Bites Cookies">Kush Bites Cookies</option>
+        <option value="Kush Glazed Popcorn">Kush Glazed Popcorn</option>
+        <option value="Kush Shawarma">Kush Shawarma</option>
+      </select>
 
-      products.forEach(item => {
-        const option = document.createElement("option");
-        option.value = item;
-        option.textContent = item;
-        select.appendChild(option);
-      });
+      <label>Quantity</label>
+      <input type="number" name="quantity${orderCount}" min="1" />
+    `;
+    container.appendChild(group);
+  }
 
-      const quantity = document.createElement("input");
-      quantity.type = "number";
-      quantity.name = "quantity[]";
-      quantity.placeholder = "Quantity";
-      quantity.min = 1;
-      quantity.required = true;
+  document.querySelector("form").addEventListener("submit", function (e) {
+    setTimeout(() => {
+      e.target.reset();
+    }, 500);
+  });
+</script>
 
-      wrapper.appendChild(select);
-      wrapper.appendChild(quantity);
-      container.appendChild(wrapper);
-    }
-
-    document.forms[0].addEventListener("submit", function (e) {
-      setTimeout(() => {
-        this.reset();
-        document.getElementById("orders").innerHTML = "";
-      }, 1000);
-    });
-
-    addOrderField();
-  </script></body>
+</body>
 </html>
