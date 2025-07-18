@@ -1,145 +1,163 @@
- <!-- START OF ORDER FORM SECTION -->
-<div class="mt-10">
-  <h2 class="text-2xl font-bold mb-4 text-white">Place Your Order</h2>
-  <form id="orderForm" class="bg-white p-6 rounded-xl shadow-md space-y-4" netlify>
-    <div>
-      <label for="name" class="block text-gray-700">Full Name</label>
-      <input type="text" name="name" id="name" required class="w-full mt-1 p-2 border rounded" />
+ <!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baked</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Rubik', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+    header img {
+      max-height: 60px;
+      vertical-align: middle;
+    }
+    h1 {
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .product-group {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .remove-btn {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 4px;
+      margin-top: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Baked Logo" />
+    <h1>Baked Order Form</h1>
+  </header>
+  <div class="container">
+    <form name="orderForm" method="POST" data-netlify="true" enctype="multipart/form-data">
+      <label for="phone">Phone Number:</label>
+      <input type="tel" name="phone" id="phone" required /><div id="product-container">
+    <div class="product-group">
+      <label>Product:</label>
+      <select name="products[]" required onchange="disableUsedOptions()">
+        <option value="">Select product</option>
+        <option value="Kush Gummies">Kush Gummies</option>
+        <option value="Kush Ice-Cream">Kush Ice-Cream</option>
+        <option value="Kush Bites Cookies">Kush Bites Cookies</option>
+        <option value="Kush Glazed Popcorn">Kush Glazed Popcorn</option>
+        <option value="Shawarma">Shawarma</option>
+      </select>
     </div>
-    <div>
-      <label for="phone" class="block text-gray-700">Phone Number</label>
-      <input type="tel" name="phone" id="phone" required class="w-full mt-1 p-2 border rounded" />
-    </div>
-    <div>
-      <label for="address" class="block text-gray-700">Delivery Address</label>
-      <textarea name="address" id="address" required class="w-full mt-1 p-2 border rounded"></textarea>
-    </div>
+  </div>
 
-    <div id="productContainer">
-      <div class="productRow flex items-center gap-2 mb-2">
-        <select name="products[]" class="productSelect w-full p-2 border rounded" required>
-          <option value="" disabled selected>Select a product</option>
+  <button type="button" onclick="addProduct()">+ Add another product</button>
+
+  <label for="address">Delivery Address:</label>
+  <input type="text" name="address" id="address" required />
+
+  <label for="receipt">Upload Payment Receipt:</label>
+  <input type="file" name="receipt" id="receipt" accept="image/*,application/pdf" required />
+
+  <button type="submit">Submit Order</button>
+</form>
+
+  </div>  <script>
+    const container = document.getElementById("product-container");
+
+    function disableUsedOptions() {
+      const selects = container.querySelectorAll("select");
+      const selectedValues = [...selects].map(s => s.value);
+
+      selects.forEach(select => {
+        const currentValue = select.value;
+        [...select.options].forEach(option => {
+          if (option.value && option.value !== currentValue && selectedValues.includes(option.value)) {
+            option.disabled = true;
+          } else {
+            option.disabled = false;
+          }
+        });
+      });
+    }
+
+    function addProduct() {
+      const div = document.createElement("div");
+      div.className = "product-group";
+      div.innerHTML = `
+        <label>Product:</label>
+        <select name="products[]" required onchange="disableUsedOptions()">
+          <option value="">Select product</option>
           <option value="Kush Gummies">Kush Gummies</option>
-          <option value="Kush Ice Cream">Kush Ice Cream</option>
+          <option value="Kush Ice-Cream">Kush Ice-Cream</option>
           <option value="Kush Bites Cookies">Kush Bites Cookies</option>
           <option value="Kush Glazed Popcorn">Kush Glazed Popcorn</option>
-          <option value="Kush Shawarma">Kush Shawarma</option>
+          <option value="Shawarma">Shawarma</option>
         </select>
-        <input type="number" name="quantity[]" placeholder="Qty" min="1" class="w-20 p-2 border rounded" required />
-      </div>
-    </div>
+        <button type="button" class="remove-btn" onclick="removeProduct(this)">−</button>
+      `;
+      container.appendChild(div);
+      disableUsedOptions();
+    }
 
-    <button type="button" id="addProduct" class="text-sm text-green-600 underline">+ Add another product</button>
+    function removeProduct(button) {
+      button.parentElement.remove();
+      disableUsedOptions();
+    }
 
-    <div>
-      <label for="payment" class="block text-gray-700">Upload Payment Receipt</label>
-      <input type="file" name="payment" id="payment" accept="image/*,application/pdf" required class="w-full mt-1 p-2 border rounded" />
-    </div>
-
-    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Submit Order</button>
-  </form>
-</div>
-
-<script>
-  const productList = [
-    "Kush Gummies",
-    "Kush Ice Cream",
-    "Kush Bites Cookies",
-    "Kush Glazed Popcorn",
-    "Kush Shawarma"
-  ];
-
-  const productContainer = document.getElementById("productContainer");
-  const addProductBtn = document.getElementById("addProduct");
-
-  function getSelectedProducts() {
-    return Array.from(document.querySelectorAll(".productSelect")).map(select => select.value);
-  }
-
-  function createProductRow() {
-    const selected = getSelectedProducts();
-    const row = document.createElement("div");
-    row.className = "productRow flex items-center gap-2 mb-2";
-
-    const select = document.createElement("select");
-    select.name = "products[]";
-    select.className = "productSelect w-full p-2 border rounded";
-    select.required = true;
-
-    const defaultOption = document.createElement("option");
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    defaultOption.textContent = "Select a product";
-    select.appendChild(defaultOption);
-
-    productList.forEach(product => {
-      if (!selected.includes(product)) {
-        const option = document.createElement("option");
-        option.value = product;
-        option.textContent = product;
-        select.appendChild(option);
-      }
+    document.querySelector("form").addEventListener("submit", function (e) {
+      setTimeout(() => {
+        this.reset();
+        const products = document.querySelectorAll(".product-group");
+        products.forEach((el, i) => i > 0 && el.remove());
+        disableUsedOptions();
+      }, 100);
     });
-
-    const qty = document.createElement("input");
-    qty.type = "number";
-    qty.name = "quantity[]";
-    qty.placeholder = "Qty";
-    qty.min = 1;
-    qty.required = true;
-    qty.className = "w-20 p-2 border rounded";
-
-    const removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.innerHTML = "➖";
-    removeBtn.className = "text-red-500 text-lg";
-    removeBtn.onclick = () => {
-      row.remove();
-      updateAllProductOptions();
-    };
-
-    row.appendChild(select);
-    row.appendChild(qty);
-    row.appendChild(removeBtn);
-
-    productContainer.appendChild(row);
-    updateAllProductOptions();
-  }
-
-  function updateAllProductOptions() {
-    const selected = getSelectedProducts();
-    const selects = document.querySelectorAll(".productSelect");
-
-    selects.forEach(select => {
-      const currentValue = select.value;
-      select.innerHTML = "";
-
-      const defaultOption = document.createElement("option");
-      defaultOption.disabled = true;
-      defaultOption.selected = !currentValue;
-      defaultOption.textContent = "Select a product";
-      select.appendChild(defaultOption);
-
-      productList.forEach(product => {
-        if (!selected.includes(product) || product === currentValue) {
-          const option = document.createElement("option");
-          option.value = product;
-          option.textContent = product;
-          option.selected = product === currentValue;
-          select.appendChild(option);
-        }
-      });
-    });
-  }
-
-  addProductBtn.addEventListener("click", createProductRow);
-
-  document.getElementById("orderForm").addEventListener("submit", function(e) {
-    setTimeout(() => {
-      this.reset();
-      productContainer.innerHTML = "";
-      createProductRow();
-    }, 1000);
-  });
-</script>
-<!-- END OF ORDER FORM SECTION -->
+  </script></body>
+</html>
