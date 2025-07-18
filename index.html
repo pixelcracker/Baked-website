@@ -1,180 +1,235 @@
- <!DOCTYPE html><html lang="en">
+ <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bakedsite</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baked</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Arial', sans-serif;
       background-color: #111;
-      color: #fff;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
     }
+
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background-color: #1e1e1e;
       padding: 1rem;
-      background-color: #1a1a1a;
-      border-bottom: 1px solid #333;
+      text-align: center;
     }
-    .logo {
+
+    header img {
+      height: 60px;
+    }
+
+    .tabs {
       display: flex;
-      align-items: center;
+      justify-content: center;
+      background-color: #222;
     }
-    .logo img {
-      height: 40px;
-      margin-right: 10px;
+
+    .tab {
+      padding: 1rem 2rem;
+      cursor: pointer;
+      background-color: #222;
+      border: none;
+      color: #f5f5f5;
+      font-weight: bold;
     }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
+
+    .tab.active {
+      background-color: #333;
+      border-bottom: 3px solid #4CAF50;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .container {
+
+    .tab-content {
+      display: none;
       padding: 2rem;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
+
+    .tab-content.active {
+      display: block;
     }
-    .menu {
-      margin-bottom: 3rem;
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
     }
+
     .menu-item {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .form-group {
       margin-bottom: 1rem;
     }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      background-color: #1e1e1e;
-      padding: 2rem;
-      border-radius: 10px;
-    }
-    select, input, button {
-      padding: 0.7rem;
-      border-radius: 5px;
+
+    input, select, button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.25rem;
       border: none;
+      border-radius: 8px;
       font-size: 1rem;
     }
-    select, input[type="file"] {
-      background-color: #2a2a2a;
-      color: #fff;
+
+    input[type="file"] {
+      color: white;
+      background-color: #333;
     }
-    button {
-      background-color: #00c26e;
-      color: #fff;
+
+    .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      margin-top: 0.5rem;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #00a85d;
-    }
-    .product-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .remove-btn {
-      background-color: red;
-      padding: 0.5rem 1rem;
+
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
       font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo">
-      <span>Baked</span>
-    </div>
-    <nav>
-      <a href="#menu">Menu</a>
-      <a href="#order">Order</a>
-    </nav>
+    <img src="logo.png" alt="Baked Logo" />
   </header>
-  <div class="container">
-    <section id="menu" class="menu">
-      <h1>Menu</h1>
-      <div class="menu-item">Kush Gummies - Sweet, chewy edibles</div>
-      <div class="menu-item">Kush Ice Cream - Creamy and chilled</div>
-      <div class="menu-item">Kush Shawarma - Creamy, meaty</div>
-      <div class="menu-item">Kush Brownie - Rich, fudgy</div>
-    </section>
-    <section id="order">
-      <h1>Place an Order</h1>
-      <form id="orderForm">
-        <input type="tel" name="phone" placeholder="Phone Number" required />
-        <input type="text" name="address" placeholder="Delivery Address" required /><div id="productList"></div>
-    <button type="button" onclick="addProduct()">+ Add Another Product</button>
 
-    <label>Upload Payment Receipt</label>
-    <input type="file" name="payment" required />
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('menu')">Menu</button>
+    <button class="tab" onclick="showTab('order')">Order</button>
+  </div>
 
-    <button type="submit">Submit</button>
-  </form>
-</section>
+  <div id="menu" class="tab-content active">
+    <h2>Our Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item">Kush Gummies</div>
+      <div class="menu-item">Kush Ice-cream</div>
+      <div class="menu-item">Space Cookies</div>
+      <div class="menu-item">Cosmic Cakes</div>
+      <div class="menu-item">Zooty Brownies</div>
+    </div>
+  </div>
 
-  </div>  <script>
-    const products = ["Kush Gummies", "Kush Ice Cream", "Kush Shawarma", "Kush Brownie"];
-    let selectedProducts = [];
+  <div id="order" class="tab-content">
+    <h2>Place Your Order</h2>
+    <form id="orderForm">
+      <div id="productsContainer"></div>
+      <button type="button" onclick="addProduct()">Add Another Product</button>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Delivery Address</label>
+        <input type="text" id="address" required />
+      </div>
+
+      <div class="form-group">
+        <label for="payment">Upload Payment Receipt</label>
+        <input type="file" id="payment" accept="image/*,.pdf" required />
+      </div>
+
+      <button class="submit-btn" type="submit">Submit Order</button>
+    </form>
+  </div>
+
+  <script>
+    const menuItems = [
+      "Kush Gummies",
+      "Kush Ice-cream",
+      "Space Cookies",
+      "Cosmic Cakes",
+      "Zooty Brownies"
+    ];
+
+    let selectedItems = [];
+
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
 
     function addProduct() {
-      const productDiv = document.createElement('div');
-      productDiv.className = 'product-row';
+      const container = document.getElementById('productsContainer');
+      const index = Date.now();
+      const availableItems = menuItems.filter(item => !selectedItems.includes(item));
 
-      const select = document.createElement('select');
-      products.forEach(p => {
-        if (!selectedProducts.includes(p)) {
-          const option = document.createElement('option');
-          option.value = p;
-          option.textContent = p;
-          select.appendChild(option);
-        }
+      if (availableItems.length === 0) return;
+
+      const div = document.createElement('div');
+      div.classList.add('form-group');
+      div.innerHTML = `
+        <select onchange="handleSelectChange(this, ${index})">
+          <option value="">Select Product</option>
+          ${availableItems.map(item => `<option value="${item}">${item}</option>`).join('')}
+        </select>
+        <input type="number" placeholder="Quantity" min="1" required />
+        <button type="button" class="remove-btn" onclick="removeProduct(this, ${index})">➖</button>
+      `;
+      div.setAttribute('data-index', index);
+      container.appendChild(div);
+    }
+
+    function handleSelectChange(select, index) {
+      const selected = select.value;
+      const previous = select.getAttribute('data-prev');
+      if (previous) {
+        selectedItems = selectedItems.filter(i => i !== previous);
+      }
+      if (selected) {
+        selectedItems.push(selected);
+        select.setAttribute('data-prev', selected);
+      }
+      refreshDropdowns();
+    }
+
+    function removeProduct(btn, index) {
+      const div = btn.closest('.form-group');
+      const select = div.querySelector('select');
+      const value = select.value;
+      if (value) {
+        selectedItems = selectedItems.filter(i => i !== value);
+      }
+      div.remove();
+      refreshDropdowns();
+    }
+
+    function refreshDropdowns() {
+      document.querySelectorAll('#productsContainer select').forEach(select => {
+        const prev = select.getAttribute('data-prev');
+        const options = menuItems
+          .filter(item => !selectedItems.includes(item) || item === prev)
+          .map(item => `<option value="${item}" ${item === prev ? 'selected' : ''}>${item}</option>`);
+        select.innerHTML = `<option value="">Select Product</option>` + options.join('');
       });
-
-      const quantity = document.createElement('input');
-      quantity.type = 'number';
-      quantity.min = 1;
-      quantity.placeholder = 'Qty';
-      quantity.required = true;
-
-      const removeBtn = document.createElement('button');
-      removeBtn.type = 'button';
-      removeBtn.textContent = '−';
-      removeBtn.className = 'remove-btn';
-      removeBtn.onclick = () => {
-        const removedProduct = select.value;
-        selectedProducts = selectedProducts.filter(p => p !== removedProduct);
-        productDiv.remove();
-      };
-
-      select.onchange = () => {
-        if (selectedProducts.includes(select.value)) {
-          alert("Product already selected");
-          select.selectedIndex = 0;
-          return;
-        }
-        selectedProducts.push(select.value);
-      };
-
-      productDiv.appendChild(select);
-      productDiv.appendChild(quantity);
-      productDiv.appendChild(removeBtn);
-      document.getElementById('productList').appendChild(productDiv);
     }
 
     document.getElementById('orderForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      alert("Order submitted successfully!");
+      alert('Order submitted!');
       this.reset();
-      document.getElementById('productList').innerHTML = '';
-      selectedProducts = [];
+      selectedItems = [];
+      document.getElementById('productsContainer').innerHTML = '';
     });
-  </script></body>
+  </script>
+</body>
 </html>
