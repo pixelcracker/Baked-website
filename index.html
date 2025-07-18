@@ -3,172 +3,195 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Get Baked</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet"/>
+  <title>Baked</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" />
   <style>
     body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0f0f0f;
+      color: #f3f3f3;
       margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background-color: #fafafa;
-      color: #333;
-      padding: 20px;
+      padding: 0;
     }
 
     header {
       text-align: center;
-      margin-bottom: 20px;
+      padding: 1rem;
+      background-color: #1a1a1a;
     }
 
     header img {
-      width: 120px;
-      margin-bottom: 10px;
+      max-width: 120px;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
+      margin-top: 0.5rem;
+      color: #fff;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      background-color: #161616;
+    }
+
+    .tab {
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #00ff99;
+      color: #00ff99;
+    }
+
+    .content {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .product {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 1rem;
+    }
+
+    .product h3 {
       margin: 0;
+      color: #00ff99;
     }
 
-    .menu, .order-form {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    .menu h2, .order-form h2 {
-      margin-top: 0;
-      font-size: 1.8rem;
-      color: #2a2a2a;
-    }
-
-    .menu-item {
-      margin-bottom: 15px;
-    }
-
-    .menu-item h3 {
-      margin: 0;
-      font-size: 1.2rem;
-    }
-
-    .menu-item p {
-      margin: 4px 0 10px;
-      color: #666;
-    }
-
-    form input, form select, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-family: 'Outfit', sans-serif;
-    }
-
-    form button {
-      padding: 12px 20px;
-      background: #4CAF50;
+    input, select, textarea, button {
+      padding: 0.75rem;
       border: none;
-      color: white;
-      font-size: 1rem;
-      border-radius: 10px;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+
+    input, select, textarea {
+      background-color: #1f1f1f;
+      color: #fff;
+    }
+
+    input[type="file"] {
+      background-color: transparent;
+    }
+
+    button {
+      background-color: #00ff99;
+      color: #000;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    form button:hover {
-      background-color: #3e9140;
+    button:hover {
+      background-color: #00cc77;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="https://getbaked.netlify.app/logo.png" alt="Baked Logo" />
-    <h1>baked</h1>
-    <p><em>Ready to get baked?</em></p>
+    <img src="logo.png" alt="Baked Logo" />
+    <h1>Get Baked</h1>
   </header>
 
-  <section class="menu">
-    <h2>Menu</h2>
-    <div class="menu-item">
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('menu')">Menu</div>
+    <div class="tab" onclick="showTab('order')">Order</div>
+  </div>
+
+  <div class="content" id="menu">
+    <div class="product">
       <h3>Kush Gummies</h3>
-      <p>Chewy, sweet</p>
+      <p>Chewy, sweet.</p>
     </div>
-    <div class="menu-item">
+    <div class="product">
       <h3>Kush Ice Cream</h3>
-      <p>Creamy, vanilla</p>
+      <p>Creamy, vanilla.</p>
     </div>
-    <div class="menu-item">
+    <div class="product">
       <h3>Kush Bites Cookies</h3>
-      <p>Soft-baked</p>
+      <p>Soft-baked.</p>
     </div>
-    <div class="menu-item">
+    <div class="product">
       <h3>Kush Glazed Popcorn</h3>
-      <p>Crunchy, glazed, milky</p>
+      <p>Crunchy, glazed, milky.</p>
     </div>
-    <div class="menu-item">
+    <div class="product">
       <h3>Kush Shawarma</h3>
-      <p>Creamy, meaty</p>
+      <p>Creamy, meaty.</p>
     </div>
-  </section>
+  </div>
 
-  <section class="order-form">
-    <h2>Place Your Order</h2>
-    <form name="order" method="POST" data-netlify="true" enctype="multipart/form-data" onsubmit="this.reset(); alert('Order submitted!')">
-      <input type="tel" name="phone" placeholder="Phone Number" required />
-      <input type="text" name="address" placeholder="Delivery Address" required />
-
-      <div id="orderContainer">
-        <select name="order-1" required>
-          <option value="" disabled selected>Select a product</option>
+  <div class="content" id="order" style="display:none;">
+    <form name="order" method="POST" data-netlify="true" enctype="multipart/form-data" onsubmit="this.reset(); alert('Order submitted!'); return false;">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="tel" name="phone" placeholder="Phone number" required />
+      
+      <div id="orderFields">
+        <select name="product[]" required>
+          <option value="">Select a product</option>
           <option value="Kush Gummies">Kush Gummies</option>
           <option value="Kush Ice Cream">Kush Ice Cream</option>
           <option value="Kush Bites Cookies">Kush Bites Cookies</option>
           <option value="Kush Glazed Popcorn">Kush Glazed Popcorn</option>
           <option value="Kush Shawarma">Kush Shawarma</option>
         </select>
-        <input type="number" name="quantity-1" placeholder="Quantity" min="1" required />
+        <input type="number" name="quantity[]" placeholder="Quantity" required />
       </div>
 
-      <button type="button" onclick="addOrder()">Add Another Product</button>
+      <button type="button" onclick="addOrderField()">Add Another Product</button>
 
-      <input type="file" name="receipt" accept="image/*" required />
+      <input type="text" name="address" placeholder="Delivery address" required />
+      <input type="file" name="receipt" required />
+      <label style="margin-top: -1rem; font-size: 0.85rem;">Upload Payment Receipt</label>
 
       <button type="submit">Submit Order</button>
     </form>
-  </section>
+  </div>
 
   <script>
-    let orderCount = 1;
+    function showTab(tab) {
+      document.getElementById('menu').style.display = tab === 'menu' ? 'block' : 'none';
+      document.getElementById('order').style.display = tab === 'order' ? 'block' : 'none';
 
-    function addOrder() {
-      orderCount++;
-      const container = document.getElementById("orderContainer");
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      document.querySelector('.tab:nth-child(' + (tab === 'menu' ? 1 : 2) + ')').classList.add('active');
+    }
 
-      const select = document.createElement("select");
-      select.name = `order-${orderCount}`;
+    function addOrderField() {
+      const container = document.getElementById('orderFields');
+      const select = document.createElement('select');
+      select.name = "product[]";
       select.required = true;
       select.innerHTML = `
-        <option value="" disabled selected>Select a product</option>
+        <option value="">Select a product</option>
         <option value="Kush Gummies">Kush Gummies</option>
         <option value="Kush Ice Cream">Kush Ice Cream</option>
         <option value="Kush Bites Cookies">Kush Bites Cookies</option>
         <option value="Kush Glazed Popcorn">Kush Glazed Popcorn</option>
         <option value="Kush Shawarma">Kush Shawarma</option>
       `;
-
-      const quantity = document.createElement("input");
-      quantity.name = `quantity-${orderCount}`;
+      const quantity = document.createElement('input');
       quantity.type = "number";
-      quantity.min = "1";
+      quantity.name = "quantity[]";
       quantity.placeholder = "Quantity";
       quantity.required = true;
-
+      container.appendChild(document.createElement('br'));
       container.appendChild(select);
       container.appendChild(quantity);
     }
   </script>
-
 </body>
 </html>
